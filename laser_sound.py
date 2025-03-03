@@ -30,7 +30,9 @@ class LaserSound:
             A pygame Sound object containing the generated laser sound
         """
         # Generate time array
-        t = np.linspace(0, self.duration, int(self.sample_rate * self.duration))
+        t = np.linspace(
+            0, self.duration, int(self.sample_rate * self.duration)
+        )
 
         # Create frequency sweep (glissando)
         sweep_factor = np.exp(-3 * t)  # Exponential decay
@@ -40,15 +42,17 @@ class LaserSound:
         main_wave = np.sin(2 * np.pi * sweep_freq * t)
 
         # Add harmonics with sweep
-        harmonics = 0.5 * np.sin(2 * np.pi * sweep_freq * 2 * t) + 0.25 * np.sin(
-            2 * np.pi * sweep_freq * 3 * t
-        )
+        harmonics = 0.5 * np.sin(
+            2 * np.pi * sweep_freq * 2 * t
+        ) + 0.25 * np.sin(2 * np.pi * sweep_freq * 3 * t)
 
         # Add a high-pitched "whistle" component
         whistle = 0.3 * np.sin(2 * np.pi * frequency * 8 * t) * sweep_factor
 
         # Add a low "whoosh" component
-        whoosh = 0.2 * np.sin(2 * np.pi * frequency * 0.5 * t) * (1 - sweep_factor)
+        whoosh = (
+            0.2 * np.sin(2 * np.pi * frequency * 0.5 * t) * (1 - sweep_factor)
+        )
 
         # Combine all waves and normalize
         combined_wave = main_wave + harmonics + whistle + whoosh
