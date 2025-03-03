@@ -1,0 +1,9 @@
+pygame==2.5.2
+numpy==1.24.3
+pytest==7.4.3
+coverage==7.3.2
+pytest-cov==4.1.0
+pre-commit==3.5.0
+ruff==0.1.9
+pylint==3.0.2
+mypy==1.8.0
